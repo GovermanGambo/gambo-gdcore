@@ -5,11 +5,11 @@ namespace Gambo.GDCore;
 
 public static class ControlExtensions
 {
-    public static async Task DoPosition(this Control control, Vector2 targetPosition, float duration)
+    public static async Task DoPosition(this Control control, Vector2 targetPosition, float duration, Tween.TransitionType transitionType = Tween.TransitionType.Linear)
     {
         await control.PerformTween(tween =>
         {
-            tween.TweenProperty(control, "global_position", targetPosition, duration);
+            tween.TweenProperty(control, "global_position", targetPosition, duration).SetTrans(transitionType);
         });
     }
 

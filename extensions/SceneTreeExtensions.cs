@@ -18,6 +18,12 @@ public static class SceneTreeExtensions
         await sceneTree.ToSignal(timer, "timeout");
     }
 
+    public static async Task InvokeDelayed(this SceneTree sceneTree, float delaySeconds, Action action)
+    {
+        await sceneTree.WaitForSeconds(delaySeconds);
+        action();
+    }
+
     public static async Task ChangeSceneTo<TNode>(this SceneTree sceneTree, PackedScene packedScene, Action<TNode> beforeChange = null, PackedScene transition = null) where TNode : Node
     {
         ITransition transitionNode = null;

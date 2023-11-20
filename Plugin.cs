@@ -1,18 +1,22 @@
 #if TOOLS
 using Godot;
 using System;
+using Gambo.GDCore.Editor;
 
 [Tool]
 public partial class Plugin : EditorPlugin
 {
+	private InspectorButtonPlugin m_inspectorButtonPlugin;
+	
 	public override void _EnterTree()
 	{
-		// Initialization of the plugin goes here.
+		m_inspectorButtonPlugin = new InspectorButtonPlugin();
+		AddInspectorPlugin(m_inspectorButtonPlugin);
 	}
 
 	public override void _ExitTree()
 	{
-		// Clean-up of the plugin goes here.
+		RemoveInspectorPlugin(m_inspectorButtonPlugin);
 	}
 }
 #endif
