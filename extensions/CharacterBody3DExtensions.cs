@@ -17,6 +17,6 @@ public static class CharacterBody3DExtensions
         });
         
         characterBody.GlobalPosition = targetPosition;
-        characterBody.Velocity = Vector3.Zero;
+        characterBody.Velocity = characterBody.Velocity with { X = 0f, Z = 0f };
     }
 }
