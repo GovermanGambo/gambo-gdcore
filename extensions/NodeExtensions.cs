@@ -76,6 +76,7 @@ public static class NodeExtensions
     
     public static Task PerformTween(this Node node, Action<Tween> tweenAction)
     {
+        var tree = node.GetTree();
         var completion = new TaskCompletionSource();
         var tween = node.CreateTween();
         tweenAction(tween);
