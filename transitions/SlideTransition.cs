@@ -22,7 +22,6 @@ public partial class SlideTransition : ColorRect, ITransition
     {
         Color = Colors.Black;
         ZIndex = 127;
-        SetAnchorsPreset(LayoutPreset.FullRect);
         Size = GetViewportRect().Size;
     }
     
