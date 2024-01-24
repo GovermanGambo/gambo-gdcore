@@ -19,4 +19,11 @@ public static class CharacterBody3DExtensions
         characterBody.GlobalPosition = targetPosition;
         characterBody.Velocity = characterBody.Velocity with { X = 0f, Z = 0f };
     }
+
+    public static Task Jump(this CharacterBody3D characterBody, float force)
+    {
+        characterBody.Velocity = characterBody.Velocity with { Y = -force };
+        
+        return Task.CompletedTask;
+    }
 }
