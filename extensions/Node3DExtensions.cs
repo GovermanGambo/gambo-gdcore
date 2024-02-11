@@ -7,6 +7,17 @@ namespace Gambo.Core;
 
 public static class Node3DExtensions
 {
+    public static async Task MoveTo(this Node3D node3D, Node3D other, float duration)
+    {
+        float distance = node3D.GlobalPosition.DistanceTo(other.GlobalPosition);
+        float delta = distance / duration * (float)node3D.GetProcessDeltaTime();
+        while (node3D.GlobalPosition.DistanceTo(other.GlobalPosition) > float.Epsilon)
+        {
+            node3D.GlobalPosition = node3D.GlobalPosition.MoveToward(other.GlobalPosition, delta);
+            await node3D.GetTree().WaitForProcessFrame();
+        }
+    }
+    
     public static Task MoveTo(this Node3D node3D, Vector3 position, float duration, Tween.TransitionType transition = Tween.TransitionType.Linear, Tween.EaseType ease = Tween.EaseType.InOut)
     {
         var completion = new TaskCompletionSource();

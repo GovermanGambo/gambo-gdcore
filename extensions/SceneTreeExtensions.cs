@@ -45,29 +45,4 @@ public static class SceneTreeExtensions
         await sceneTree.WaitForSeconds(delaySeconds);
         action();
     }
-
-    public static async Task ChangeSceneTo<TNode>(this SceneTree sceneTree, PackedScene packedScene, Action<TNode> beforeChange = null, PackedScene transition = null) where TNode : Node
-    {
-        ITransition transitionNode = null;
-        if (transition is not null)
-        {
-            transitionNode = transition.Instantiate<ITransition>();
-            sceneTree.Root.AddChild((Node)transitionNode);
-            await transitionNode.StartTransition();
-        }
-        
-        var scene = packedScene.Instantiate<TNode>();
-        beforeChange?.Invoke(scene);
-        var previousScene = sceneTree.CurrentScene;
-        sceneTree.Root.RemoveChild(previousScene);
-        previousScene.QueueFree();
-        sceneTree.Root.AddChild(scene);
-        sceneTree.CurrentScene = scene;
-
-        if (transitionNode is not null)
-        {
-            await transitionNode.EndTransition();
-            ((Node)transitionNode).QueueFree();
-        }
-    }
 }
