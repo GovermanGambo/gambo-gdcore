@@ -10,11 +10,11 @@ public static class Node3DExtensions
     public static async Task MoveTo(this Node3D node3D, Node3D other, float duration)
     {
         float distance = node3D.GlobalPosition.DistanceTo(other.GlobalPosition);
-        float delta = distance / duration * (float)node3D.GetProcessDeltaTime();
+        float delta = distance / duration * (float)node3D.GetPhysicsProcessDeltaTime();
         while (node3D.GlobalPosition.DistanceTo(other.GlobalPosition) > float.Epsilon)
         {
             node3D.GlobalPosition = node3D.GlobalPosition.MoveToward(other.GlobalPosition, delta);
-            await node3D.GetTree().WaitForProcessFrame();
+            await node3D.GetTree().WaitForPhysicsFrame();
         }
     }
     

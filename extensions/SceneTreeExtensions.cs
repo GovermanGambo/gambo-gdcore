@@ -33,6 +33,11 @@ public static class SceneTreeExtensions
     {
         await sceneTree.ToSignal(sceneTree, "process_frame");
     }
+    
+    public static async Task WaitForPhysicsFrame(this SceneTree sceneTree)
+    {
+        await sceneTree.ToSignal(sceneTree, "physics_frame");
+    }
 
     public static async Task WaitForSeconds(this SceneTree sceneTree, float duration)
     {
